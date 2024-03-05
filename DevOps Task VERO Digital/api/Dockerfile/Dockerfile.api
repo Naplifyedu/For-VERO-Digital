@@ -1,0 +1,25 @@
+FROM php:8.1-apache
+
+RUN apt-get update && apt-get install -y \
+    unixodbc-dev \
+    unixodbc \
+    gnupg
+
+RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg && \
+    curl https://packages.microsoft.com/config/debian/12/prod.list | tee /etc/apt/sources.list.d/mssql-release.list && \
+    apt-get update 
+
+RUN ACCEPT_EULA=Y apt-get install -y msodbcsql18
+
+RUN pecl install sqlsrv pdo_sqlsrv
+RUN docker-php-ext-enable sqlsrv pdo_sqlsrv
+
+COPY ./Dockerfile/QuickDbTest.php /var/www/html/
+
+ARG CONTAINER_NAME
+ENV HOSTNAME=$CONTAINER_NAME
+
+EXPOSE 80
+
+CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+

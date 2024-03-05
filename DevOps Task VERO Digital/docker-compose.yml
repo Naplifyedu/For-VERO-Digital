@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  mssql-server:
+    build:
+      context: ./mssql-server
+      dockerfile: ./Dockerfile/Dockerfile.mssql-server
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Un!q@to2023
+
+  api:
+    build:
+      context: ./api
+      dockerfile: ./Dockerfile/Dockerfile.api
+    ports:
+      - "80:80"
+    depends_on:
+      - mssql-server
+
+
