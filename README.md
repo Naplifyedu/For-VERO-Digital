@@ -3,4 +3,4 @@
 
 Hello, this is the project I've been assigned to work on. I've made some modifications to your QuickDbTest.php file. Specifically, on line 6, I replaced "localhost" with the hostname, and on line 7, I changed the database name to "master" (the default one) instead of "db_vero_digital". I hope you appreciate my efforts to cut down the work and time. :P
 I fogot to mention the text below in the email! (Terribly sorry).
-I have also changed $dsn = "sqlsrv:server=".self::host.";Database=".self::db**.";Encrypt=true;TrustServerCertificate=true"**;, so I won't need certificate
+I have also changed $dsn = "sqlsrv:server=".self::host.";Database=".self::db.";Encrypt=true;TrustServerCertificate=true";, so I won't need certificate
