@@ -7,6 +7,7 @@ services:
       dockerfile: ./Dockerfile/Dockerfile.mssql-server
     ports:
       - "1433:1433"
+    command: ["bash", "-c", "(/opt/mssql/bin/sqlservr &) && (sleep 10s && /opt/mssql-tools/bin/sqlcmd -U sa -P Un!q@to2023 -Q 'CREATE DATABASE db_vero_digital') && sleep infinity"]
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=Un!q@to2023
